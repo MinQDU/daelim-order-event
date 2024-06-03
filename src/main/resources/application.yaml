@@ -1,0 +1,30 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: daelim-order
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://127.0.0.1:3306/order?zeroDateTimeBehavior=convertToNull"
+    #    url: "jdbc:mysql://127.0.0.1:3306/[project-name]?zeroDateTimeBehavior=convertToNull"
+    username: root
+    password: ${MYSQL_PASSWORD}
+    jpa:
+      database: mysql
+      database-platform: org.hibernate.dialect.MySQL8Dialect
+      properties:
+        hibernate:
+          storage_engine: innodb
+          format_sql: true
+          use_sql_comments: true
+      hibernate:
+        ddl-auto: validate
+      open-in-view: false
+      show_sql: true
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+jwt:
+  secret: ${JWT_SECRET}
